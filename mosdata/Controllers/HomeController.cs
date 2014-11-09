@@ -11,9 +11,9 @@ namespace mosdata.Controllers
 	{
 		public ActionResult Index()
 		{
-			var result = WebRequestProxy.Instance.GetResponse("v1/datasets", "$skip=10&$top=5&$inlinecount=allpages");
+			//var result = WebRequestProxy.Instance.GetResponse("v1/datasets", "$skip=10&$top=5&$inlinecount=allpages");
 
-			return View((object)result);
+			return View();
 		}
 
 		public ActionResult Api(string path)

@@ -1,8 +1,14 @@
-﻿@model string
-
-@{
+﻿@{
 ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-@Model
+<script type="text/javascript" src="@Url.Content("~/Scripts/JSX/Datasets.jsx")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/JSX/Api.js")"></script>
+
+<script>
+	DataMosApi.initialize({baseUrl: "api"});
+</script>
+
+<h2>Наборы данных</h2>
+
+<div id="content"></div>
