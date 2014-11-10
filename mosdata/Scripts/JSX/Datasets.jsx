@@ -10,7 +10,8 @@
 			}.bind(this)
 		})
 	},
-	handleClick: function() {
+	handleClick: function(e) {
+		e.preventDefault();
 		this.loadDataSetInfo({
 			id: this.props.id
 		});
@@ -19,20 +20,22 @@
 		var detailedInfoElems = null;
 		if (this.state.detailed) {
 			detailedInfoElems = (
-				<div>
-					<p>Категория: {this.state.detailedDatasetInfo.CategoryCaption}</p>
-					<p>Департамент: {this.state.detailedDatasetInfo.DepartmentCaption}</p>
-					<p>Описание: {this.state.detailedDatasetInfo.Description}</p>
+				<span>
+					<p><strong>Категория:</strong> {this.state.detailedDatasetInfo.CategoryCaption}</p>
+					<p><strong>Департамент:</strong> {this.state.detailedDatasetInfo.DepartmentCaption}</p>
+					<p><strong>Описание:</strong> {this.state.detailedDatasetInfo.Description}</p>
 					{this.state.detailedDatasetInfo.ContainsGeodata 
-						? (<p>Содержит гео-данные</p>)
-						: (<p>Не содержит гео-данные</p>)}
-				</div>
+						? (<p><strong>Содержит гео-данные</strong></p>)
+						: (<p><strong>Не содержит гео-данные</strong></p>)}
+				</span>
 			);
 		}
 		return (
-			<div className="dataset" onClick={this.handleClick}>
+			<div className="dataset span4">
 				<h4>{this.props.id} : {this.props.caption}</h4>
-				{detailedInfoElems}
+				{detailedInfoElems || (
+					<a className="btn" href="#" onClick={this.handleClick}>Подробно</a>
+				)}
 			</div>
 		);
 	}
@@ -57,19 +60,23 @@ var DataSetsContainer = React.createClass({
 	render: function () {
 		if (this.state.initialized){
 			var dataSetNodes = 
-				this.state.datasetsInfo.Items.
-					map(function(datasetInfo) {
+				this.state.datasetsInfo.Items.map(
+					function(datasetInfo) {
 						return (<DataSet 
+							key={datasetInfo.Id}
 							id={datasetInfo.Id} 
 							categoryId={datasetInfo.CategoryId}
 							departmentId={datasetInfo.DepartmentId}
-							caption={datasetInfo.Caption}  />);
-				});
+							caption={datasetInfo.Caption} />);
+					});
+
 			return (
 				<div className="datasets-container">
 					<h3>Всего загружено наборов данных: {this.state.datasetsInfo.Count}</h3>
-					<div className="datasets">
-						{dataSetNodes}
+					<div className="datasets container">
+						<div className="row">
+							{dataSetNodes}
+						</div>
 					</div>
 				</div>
 			);	
