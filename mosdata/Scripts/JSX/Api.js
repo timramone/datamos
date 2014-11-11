@@ -1,22 +1,30 @@
-window.DataMosApi = (function() {
+/**
+ * @typedef {Object} Settings
+ * @property {string} globalSettings
+ */
+window.DataMosApi = (function () {
 	var globalSettings = {};
 
 	return {
-		initialize: function(settings) {
+		/**
+		 * Инициализирует глобальный объект API
+		 * @param {Settings} settings параметры
+		 */
+		initialize: function (settings) {
 			globalSettings = settings;
 		},
-		loadDatasetInfo: function(params) {
+		loadDatasetInfo: function (params) {
 			$.ajax({
 				method: 'get',
 				cache: false,
 				url: globalSettings.baseUrl + "/v1/datasets/" + params.id,
-				success: function(detasetInfoString) {
+				success: function (detasetInfoString) {
 					var datasetInfo = JSON.parse(detasetInfoString);
 					params.callback(datasetInfo);
 				}
 			});
 		},
-		loadDataSets: function(params) {
+		loadDataSets: function (params) {
 			$.ajax({
 				method: 'get',
 				cache: false,
@@ -24,9 +32,9 @@ window.DataMosApi = (function() {
 				data: {
 					'$skip': params.skip,
 					'$top': params.top,
-					'$inlinecount':'allpages'
+					'$inlinecount': 'allpages'
 				},
-				success: function(datasetsInfoString) {
+				success: function (datasetsInfoString) {
 					var datasetsInfo = JSON.parse(datasetsInfoString);
 					params.callback(datasetsInfo);
 				}

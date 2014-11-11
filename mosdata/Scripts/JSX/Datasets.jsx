@@ -1,5 +1,19 @@
-﻿var DataSet = React.createClass({
-	getInitialState: function() {
+var DataSetDetailedInfo = React.createClass({
+	render: function () {
+		return (
+			<span>
+				<p><strong>Категория:</strong> {this.props.detailedDatasetInfo.CategoryCaption}</p>
+				<p><strong>Департамент:</strong> {this.props.detailedDatasetInfo.DepartmentCaption}</p>
+				<p><strong>Описание:</strong> {this.props.detailedDatasetInfo.Description}</p>
+				{this.props.detailedDatasetInfo.ContainsGeodata 
+					? (<p><strong>Содержит гео-данные</strong></p>)
+					: (<p><strong>Не содержит гео-данные</strong></p>)}
+			</span>);
+	}
+});
+
+var DataSet = React.createClass({
+	getInitialState: function () {
 		return {detailed: false};
 	},
 	loadDataSetInfo: function(params) {
@@ -10,34 +24,23 @@
 			}.bind(this)
 		})
 	},
-	handleClick: function(e) {
+	handleDetailedInfoLinkClick: function(e) {
 		e.preventDefault();
 		this.loadDataSetInfo({
 			id: this.props.id
 		});
 	},
 	render: function () {
-		var detailedInfoElems = null;
+		var detailedInfoLink = (<a className="btn" href="#" onClick={this.handleDetailedInfoLinkClick}>Подробно</a>);
+		var detailedInfo = null;
 		if (this.state.detailed) {
-			detailedInfoElems = (
-				<span>
-					<p><strong>Категория:</strong> {this.state.detailedDatasetInfo.CategoryCaption}</p>
-					<p><strong>Департамент:</strong> {this.state.detailedDatasetInfo.DepartmentCaption}</p>
-					<p><strong>Описание:</strong> {this.state.detailedDatasetInfo.Description}</p>
-					{this.state.detailedDatasetInfo.ContainsGeodata 
-						? (<p><strong>Содержит гео-данные</strong></p>)
-						: (<p><strong>Не содержит гео-данные</strong></p>)}
-				</span>
-			);
+			detailedInfo = (<DataSetDetailedInfo detailedDatasetInfo={this.state.detailedDatasetInfo} />);
 		}
 		return (
 			<div className="dataset span4">
 				<h4>{this.props.id} : {this.props.caption}</h4>
-				{detailedInfoElems || (
-					<a className="btn" href="#" onClick={this.handleClick}>Подробно</a>
-				)}
-			</div>
-		);
+				{detailedInfo || detailedInfoLink}
+			</div>);
 	}
 });	
 
@@ -78,12 +81,9 @@ var DataSetsContainer = React.createClass({
 							{dataSetNodes}
 						</div>
 					</div>
-				</div>
-			);	
+				</div>);	
 		} else {
-			return (
-				<h3>Инициализация</h3>
-			);	
+			return (<h3>Инициализация</h3>);	
 		}
 	}
 });
