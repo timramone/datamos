@@ -1,5 +1,66 @@
-var DataSetDetailedInfo = React.createClass({
+var DatasetTable = React.createClass({
 	render: function () {
+		var headerCols = this.props.detailedDatasetInfo.Columns.
+			filter(function(column) {
+				return column.Visible;
+			});
+
+		var headerColsElements = headerCols.
+			map(function(column) {
+				return (<th key={column.Name}>{column.Caption}</th>);
+			});
+		var rowsElems = this.props.datasetRows.
+			map(function(row) {
+				var cellsElems = headerCols.
+					map(function(column) {
+						return (<td key={column.Name}>{row.Cells[column.Name]}</td>);
+					})
+				return (
+					<tr key={row.Number}>
+						{cellsElems}
+					</tr>);
+			})
+		return (
+			<table>
+				<thead>
+					{headerColsElements}
+				</thead>
+				<tbody>
+					{rowsElems}
+				</tbody>
+			</table>
+		);
+	}
+});
+
+var DataSetDetailedInfo = React.createClass({
+	getInitialState: function() {
+		return {
+			initialized: false
+		};
+	},
+	hadleLoadDatasetDataLinkClick: function(e) {
+		e.preventDefault();
+		DataMosApi.loadDataSetRows({
+			top: 100,
+			skip: 0,
+			id: this.props.detailedDatasetInfo.Id,
+			callback: function(datasetRows) {
+				this.setState({
+					initialized: true,
+					rows: datasetRows
+				});
+			}.bind(this)
+		});
+	},
+	render: function () {
+		var table = null;
+		if (this.state.initialized) {
+			table = (<DatasetTable 
+				detailedDatasetInfo={this.props.detailedDatasetInfo} 
+				datasetRows={this.state.rows} />);
+		}
+
 		return (
 			<span>
 				<p><strong>Категория:</strong> {this.props.detailedDatasetInfo.CategoryCaption}</p>
@@ -8,6 +69,8 @@ var DataSetDetailedInfo = React.createClass({
 				{this.props.detailedDatasetInfo.ContainsGeodata 
 					? (<p><strong>Содержит гео-данные</strong></p>)
 					: (<p><strong>Не содержит гео-данные</strong></p>)}
+				{table}
+				<a className="btn" href="#" onClick={this.hadleLoadDatasetDataLinkClick}>Загрузить данные</a>
 			</span>);
 	}
 });

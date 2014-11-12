@@ -39,6 +39,22 @@ window.DataMosApi = (function () {
 					params.callback(datasetsInfo);
 				}
 			});
+		},
+		loadDataSetRows: function(params) {
+			$.ajax({
+				method: 'get',
+				cache: false,
+				url: globalSettings.baseUrl + "/v1/datasets/" + params.id + "/rows",
+				data: {
+					'$skip': params.skip,
+					'$top': params.top,
+					'$inlinecount': 'allpages'
+				},
+				success: function (datasetsRowsString) {
+					var datasetsRows = JSON.parse(datasetsRowsString);
+					params.callback(datasetsRows);
+				}
+			});
 		}
 	};
 })();
