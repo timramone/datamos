@@ -5,6 +5,9 @@ define(
 			initialize: function(params) {
 				var currentView = params.root.data('view');
 				if (currentView) {
+					params.root.children().each(function(index, child) {
+						React.unmountComponentAtNode(child);
+					});
 					currentView.remove();
 				}
 
