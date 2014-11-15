@@ -16,3 +16,9 @@ textarea {
     max-width: 280px;
 }
 
+.modal .modal-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.top-buffer { margin-top:5px; }

@@ -15,6 +15,7 @@ define(
 					id: this.props.datasetId,
 					callback: function (datasetInfo) {
 						this.setState({detailedDatasetInfo: datasetInfo});
+						this.props.onTitleLoad(datasetInfo.Caption);
 					}.bind(this)
 				});
 
@@ -51,7 +52,7 @@ define(
 							</tr>);
 					})
 				return (
-					<table>
+					<table className="table table-striped table-condensed">
 						<thead>
 							{headerColsElements}
 						</thead>

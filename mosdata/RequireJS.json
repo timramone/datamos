@@ -4,7 +4,7 @@
 		"jquery": "jquery-1.10.2",
 		"jquery-validate": "jquery.validate",
 		"jquery-validate-unobtrusive": "jquery.validate.unobtrusive",
-		"bootstrap": "bootstrap",
+		"bootstrap": "bootstrap.min",
 		"respond": "respond",
 		"react": "http://fb.me/react-0.12.0",
 		"backbone": "//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min",

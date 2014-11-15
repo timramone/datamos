@@ -22,15 +22,28 @@ define(
 				});
 			},
 			render: function () {
-				var detailedInfoLink = (<a className="btn" href="#" onClick={this.handleDetailedInfoLinkClick}>Подробно</a>);
+				var detailedInfoLink = (<a className="btn btn-success top-buffer" href="#" onClick={this.handleDetailedInfoLinkClick}>Подробно</a>);
 				var detailedInfo = null;
 				if (this.state.detailed) {
 					detailedInfo = (<DataSetDetailedInfo detailedDatasetInfo={this.state.detailedDatasetInfo} />);
 				}
 				return (
-					<div className="dataset span4">
-						<h4>{this.props.id} : {this.props.caption}</h4>
-						{detailedInfo || detailedInfoLink}
+					<div className="col-md-4">
+						<div className="panel panel-info">
+							<div className="panel-heading">
+								<h3 className="panel-title">
+									{this.props.caption}
+								</h3>
+								{detailedInfo ? null : detailedInfoLink}
+							</div>
+							{detailedInfo 
+								? (
+									<div className="panel-body">
+										{detailedInfo}
+									</div>)
+								: null}
+							
+						</div>
 					</div>);
 			}
 		});

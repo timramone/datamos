@@ -56,8 +56,12 @@ define(['jquery'], function ($) {
 					'$inlinecount': 'allpages'
 				},
 				success: function (datasetsRowsString) {
-					var datasetsRows = JSON.parse(datasetsRowsString);
-					params.callback(datasetsRows);
+					var datasetRows = JSON.parse(datasetsRowsString);
+					if (datasetRows.Items){
+						datasetRows = datasetRows.Items;
+					}
+
+					params.callback(datasetRows);
 				}
 			});
 		}

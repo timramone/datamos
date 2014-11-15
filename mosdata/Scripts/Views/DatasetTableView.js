@@ -1,6 +1,6 @@
 define( 
-	['react', 'backbone', 'Scripts/Views/JSX/DatasetTable.jsx?e=1'], 
-	function(React, Backbone, DatasetTable) {
+	['react', 'backbone', 'Scripts/Views/JSX/ModalForDatasetTable.jsx?e=1'], 
+	function(React, Backbone, ModalForDatasetTable) {
 		var DatasetTableView = Backbone.View.extend({
 			initialize: function(params) {
 				var currentView = params.root.data('view');
@@ -10,7 +10,7 @@ define(
 
 				currentView = this;
 
-				React.render(React.createElement(DatasetTable, { datasetId: params.datasetId }), this.el);
+				React.render(React.createElement(ModalForDatasetTable, { datasetId: params.datasetId }), this.el);
 				params.root.data('view', currentView);
 			}
 		});

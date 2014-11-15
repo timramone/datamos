@@ -55,11 +55,10 @@ define(
 							});
 
 					var loadMoreBlock = (this.state.currentPage * this.requestCount) < this.state.datasetsInfo.Count ? 
-						(<a className="btn" href="#" onClick={this.handleLoadMoreLinkClick}>Загрузить ещё...</a>) : null;
+						(<a className="btn btn-info" href="#" onClick={this.handleLoadMoreLinkClick}>Загрузить ещё...</a>) : null;
 
 					return (
 						<div className="datasets-container">
-							<h3>Всего наборов данных: {this.state.datasetsInfo.Count}</h3>
 							<div className="datasets container">
 								<div className="row">
 									{dataSetNodes}
