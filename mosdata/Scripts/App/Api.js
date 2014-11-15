@@ -1,19 +1,20 @@
-/**
- * @typedef {Object} Settings
- * @property {string} globalSettings
- */
-window.DataMosApi = (function () {
-	var globalSettings = {};
+define(['jquery'], function ($) {
 
-	return {
-		/**
-		 * Инициализирует глобальный объект API
-		 * @param {Settings} settings параметры
-		 */
+	var globalSettings = {};
+	var initialized = false;
+
+	window.GlobalDataMosApi = window.GlobalDataMosApi || {
 		initialize: function (settings) {
 			globalSettings = settings;
+			initialized = true;
+		},
+		checkIsInitialized: function () {
+			if (!initialized)
+				throw "call initialize first";
 		},
 		loadDatasetInfo: function (params) {
+			this.checkIsInitialized();
+
 			$.ajax({
 				method: 'get',
 				cache: false,
@@ -25,6 +26,8 @@ window.DataMosApi = (function () {
 			});
 		},
 		loadDataSets: function (params) {
+			this.checkIsInitialized();
+
 			$.ajax({
 				method: 'get',
 				cache: false,
@@ -40,7 +43,9 @@ window.DataMosApi = (function () {
 				}
 			});
 		},
-		loadDataSetRows: function(params) {
+		loadDataSetRows: function (params) {
+			this.checkIsInitialized();
+
 			$.ajax({
 				method: 'get',
 				cache: false,
@@ -57,4 +62,6 @@ window.DataMosApi = (function () {
 			});
 		}
 	};
-})();
+
+	return window.GlobalDataMosApi;
+});

@@ -79,6 +79,9 @@
     <Reference Include="React.Web.Mvc4">
       <HintPath>..\packages\React.Web.Mvc4.1.1.3\lib\net40\React.Web.Mvc4.dll</HintPath>
     </Reference>
+    <Reference Include="RequireJsNet">
+      <HintPath>..\packages\RequireJsNet.2.0.38.0\lib\net40\RequireJsNet.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -138,14 +141,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="readme.txt" />
+    <Content Include="Scripts\App\AppStart.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="RequireJS.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Components\RequireJS\i18n.js" />
+    <Content Include="Scripts\Components\RequireJS\require.js" />
+    <Content Include="Scripts\Components\RequireJS\text.js" />
+    <Content Include="Scripts\Controllers\Root\Home\Index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\JSX\Datasets.jsx" />
-    <Content Include="Scripts\JSX\Api.js" />
+    <Content Include="Scripts\Views\JSX\DataSet.jsx" />
+    <Content Include="Scripts\Views\JSX\DataSetDetailedInfo.jsx" />
+    <None Include="Scripts\Views\JSX\Datasets.jsx" />
+    <Content Include="Scripts\App\Api.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\noext.js" />
+    <Content Include="Scripts\Views\DatasetsView.js" />
+    <Content Include="Scripts\Views\DatasetTableView.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
@@ -169,11 +183,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\Views\JSX\DatasetTable.jsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>

@@ -2,13 +2,7 @@
 ViewBag.Title = "Index";
 }
 
-@System.Web.Optimization.Scripts.Render("~/Scripts/JSX/Datasets.jsx")
-<script type="text/javascript" src="@Url.Content("~/Scripts/JSX/Api.js")"></script>
-
-<script>
-	DataMosApi.initialize({baseUrl: "/api"});
-</script>
-
 <h2>Наборы данных</h2>
 
+<div id="dataset-table"></div>
 <div id="content"></div>

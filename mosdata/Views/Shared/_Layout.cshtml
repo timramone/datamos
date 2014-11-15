@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using RequireJsNet
+
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8" />
@@ -6,10 +8,30 @@
 	<title>@ViewBag.Title - My ASP.NET Application</title>
 	<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 	<link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
-	<script src="~/Scripts/modernizr-2.6.2.js"></script>
-	<script src="http://fb.me/react-0.12.0.js"></script>
-	<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+
+	@Html.RenderRequireJsSetup(new RequireRendererConfiguration
+	{
+		// the url from where require.js will be loaded
+		RequireJsUrl = Url.Content("~/Scripts/Components/RequireJS/require.js"),
+		// baseUrl to be passed to require.js, will be used when composing urls for scripts
+		BaseUrl = Url.Content("~/Scripts/"),
+		// a list of all the configuration files you want to load
+		ConfigurationFiles = new[] { "~/RequireJS.json" },
+		// root folder for your js controllers, will be used for composing paths to entrypoint
+		EntryPointRoot = "~/Scripts/",
+		// whether we should load overrides or not, used for autoBundles
+		LoadOverrides = HttpContext.Current.IsDebuggingEnabled,
+		// compute the value you want locale to have, used for i18n
+		LocaleSelector = html => System.Threading.Thread.CurrentThread.CurrentUICulture.Name.Split('-')[0],
+		// instance of IRequireJsLogger
+		Logger = null,
+		// extensability point for the config object
+		ProcessConfig = config => { },
+		// extensability point for the options object
+		ProcessOptions = options => { }
+	})
+
+	@System.Web.Optimization.Scripts.Render("~/Scripts/App/AppStart.js")
 </head>
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -40,6 +62,6 @@
 		</footer>
 	</div>
 
-	<script src="~/Scripts/bootstrap.min.js"></script>
+	
 </body>
 </html>

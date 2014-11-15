@@ -12,7 +12,7 @@ namespace mosdata.App_Start
 	{
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			bundles.Add(new JsxBundle("~/bundles/main")
+			bundles.Add(new JsxBundle("~/Scripts/JSX")
 				.Include("~/Scripts/JSX/Datasets.jsx"));
 		}
 	}
