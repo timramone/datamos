@@ -13,7 +13,7 @@ define(
 					callback: function (datasetInfo) {
 						this.setState({detailed: true, detailedDatasetInfo: datasetInfo});
 					}.bind(this)
-				})
+				});
 			},
 			handleDetailedInfoLinkClick: function(e) {
 				e.preventDefault();
