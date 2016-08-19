@@ -10,6 +10,6 @@ bundles.Add(new JsxBundle("~/bundles/main").Include(
     "~/Content/ajax.js",
 ));
 
-test2
+asdf
 
 Please refer to http://reactjs.net/ for more details, usage examples and sample code.
